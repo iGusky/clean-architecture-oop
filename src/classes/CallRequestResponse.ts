@@ -1,6 +1,6 @@
 import BaseResponse from "./BasicResponse";
 
-class CallRequestResponse extends BaseResponse<Object,CallRequestResponse> {
+class CallRequestResponse extends BaseResponse<CallRequestResponse> {
     id:                 number =  0;
     level_id:           number =  0;
     status_id:          number =  0;
@@ -24,18 +24,19 @@ class CallRequestResponse extends BaseResponse<Object,CallRequestResponse> {
     logs!:              null;
 
 
-  private constructor(data: Object, mensaje: string){
-    super(data, mensaje )
+  private constructor(data: Object){
+    super()
+    this.createResponse(data)
   }
 
-  public static builder(data: Object, mensaje: string): CallRequestResponse {
-    return new CallRequestResponse(data, mensaje)
+  public static builder(data: Object): CallRequestResponse {
+    return new CallRequestResponse(data)
   }
 
-  public createResponse(): CallRequestResponse {
-    this.id = this.data.id
-    this.level_id = this.data.level_id
-    this.uuid = this.data.uuid
+  public createResponse(data: Object): CallRequestResponse {
+    this.id = data.id
+    this.level_id = data.level_id
+    this.uuid = data.uuid
     return this
   }
 
